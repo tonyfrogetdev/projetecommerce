@@ -11,25 +11,23 @@ use Twig\Environment;
 
 class HelloController extends AbstractController
 {
-
-   public function __construct(Calculator $calculator)
-   {
-      $this->calculator = $calculator;
-   }
-
    /**
     * @Route("/hello/{prenom?World}", name="hello")
     */
-
-   public function hello($prenom = "World", LoggerInterface $logger, Calculator $calculator, Environment $twig)
+   public function hello($prenom = "World")
    {
-    
-
-      $logger->info("Mon message de log!");
-
-      $tva = $calculator->calcul(100);
-
-      dump($tva);
-      return new Response("Hello $prenom");
+      
+            return $this->render( "hello.html.twig", [
+               'prenom' => $prenom
+            ]);
    }
+
+/**
+ * @Route("/example", name="example")
+ */
+public function example(){
+   return $this->render( "example.html.twig", [
+      'age' => 33,
+   ]);
+}
 }
