@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,6 +24,8 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom de la catégorie est obligatoire")
+     * @Assert\Length(min=4, max=255, minMessage="Le nom de la catégorie doit contenir au moins 4 caractères")
      */
     private $name;
 
