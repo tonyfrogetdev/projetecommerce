@@ -8,13 +8,12 @@ use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductController extends AbstractController
 {
@@ -28,9 +27,7 @@ class ProductController extends AbstractController
             'slug' => $slug
         ]);
 
-        if (!$category) {
-            throw $this->createNotFoundException("La catégorie demandée n'existe pas");
-        }
+      
 
         return $this->render('product/category.html.twig', [
             'slug' => $slug,
@@ -48,11 +45,9 @@ class ProductController extends AbstractController
         $product = $productRepository->findOneBy([
             'slug' => $slug
         ]);
-
-        if (!$product) {
-            throw $this->createNotFoundException("Le produit demandé n'existe pas");
-        }
-
+       
+      
+     
         return $this->render('product/show.html.twig', [
             'product' => $product
 
@@ -62,16 +57,16 @@ class ProductController extends AbstractController
     /**
      * @Route("/admin/product/{id}/edit"), name="product_edit")
      */
-    public function edit($id, ProductRepository $productRepository, Request $request, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator)
+    public function edit($id, ProductRepository $productRepository, Request $request, EntityManagerInterface $em, ValidatorInterface $validator)
     {
-
+    
         $product = $productRepository->find($id);
 
         $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form-> isValid()) {
 
             $em->flush();
 
@@ -105,7 +100,7 @@ class ProductController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $product->setSlug(strtolower($slugger->slug($product->getName())));
 
