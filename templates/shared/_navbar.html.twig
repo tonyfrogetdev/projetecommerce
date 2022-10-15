@@ -13,13 +13,25 @@
 				{% endfor %}
 
 			</ul>
-			
+
 		</div>
 		<ul class="navbar-nav">
-			<li class="nav-item"><a href="#" class="nav-link">Inscription</a></li>
-			<li class="nav-item"><a href="#" class="btn  btn-success">Connexion</a></li>
-			<li class="nav-item"><a href="" class="btn btn-danger">Déconexion</a></li>
-			</ul>
+
+			{% if app.user %}
+				<li class="nav-item">
+					<a href="{{ path('security_logout') }}" class="btn btn-danger">Déconnexion</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a href="{{ path('app_register') }}" class="btn btn-warning">Inscription</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ path('security_login') }}" class="btn  btn-success">Connexion</a>
+				</li>
+			{% endif %}
+
+
+		</ul>
 	</div>
 
 </nav>

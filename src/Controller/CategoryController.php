@@ -6,11 +6,16 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\SensioFrameworkExtraExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 class CategoryController extends AbstractController
 {
@@ -58,7 +63,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/admin/category/{id}/edit"), name="category_edit")
+     * @Route("/admin/category/{id}/edit", name="category_edit")
      */
     public function edit(CategoryRepository $categoryRepository, $id, EntityManagerInterface $em, Request $request){
 
