@@ -20,7 +20,7 @@ class RegistrationController extends AbstractController
         $this->em = $entityManager ;
     }
     /**
-     * @Route("/inscription/liste", name="inscription_liste")
+     * @Route("/admin/inscription/liste", name="inscription_liste")
      */
     public function index(): Response
     {
