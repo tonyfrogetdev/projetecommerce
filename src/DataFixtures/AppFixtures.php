@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Purchase;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
@@ -16,7 +17,7 @@ class AppFixtures extends Fixture
 {
     protected $slugger;
     protected $hash;
-
+    
     public function __construct(SluggerInterface $slugger, UserPasswordHasherInterface $hash)
     {
 
@@ -44,13 +45,20 @@ class AppFixtures extends Fixture
         
             $manager->persist($admin);
 
+            $users= [];
+           
         for($u= 0; $u < 5; $u++){
             $user = new User();
             $hash = $this->hash->hashPassword($user, "password");
+            
+            $gender = ['m', 'f'];
 
             $user->setEmail("user$u@gmail.com")
                 ->setFullName($faker->name())
-                ->setPassword($hash);
+                ->setPassword($hash)
+                ->setCivilite($faker->title($gender));
+                
+            $users[] =$user;
 
             $manager->persist($user);
         }
@@ -75,6 +83,21 @@ class AppFixtures extends Fixture
                 $manager->persist($product);
             }
 
+            for($p = 0; $p < mt_rand(20, 40); $p++){
+                $purchase = new Purchase;
+                $purchase->setFullName($faker->name())
+                        ->setAdress($faker->streetAddress())
+                        ->setPostalCode($faker->postcode())
+                        ->setCity($faker->city)
+                        ->setUser($faker->randomElement($users))
+                        ->setTotal(mt_rand(2000, 30000));
+
+                if($faker->boolean(90)){
+                    $purchase->setStatus(Purchase::STATUS_PAID);
+                }
+
+                $manager->persist($purchase);
+            }
 
             $manager->flush();
         }

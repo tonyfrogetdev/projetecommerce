@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -53,10 +55,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=1)
-     * 
+     * @ORM\Column(type="string", length=255, )
      */
-    private $civilite;
+     private $civilite;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="user")
+     */
+    private $purchases;
+
+    public function __construct()
+    {
+        $this->purchases = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -102,6 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        
 
         return array_unique($roles);
     }
@@ -172,14 +185,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCivilite(): ?string
-    {
-        return $this->civilite;
-    }
+     public function getCivilite(): ?string
+     {
+         return $this->civilite;
+     }
 
     public function setCivilite(string $civilite): self
+     {
+         $this->civilite = $civilite;
+
+         return $this;
+     }
+
+    /**
+     * @return Collection<int, Purchase>
+     */
+    public function getPurchases(): Collection
     {
-        $this->civilite = $civilite;
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->removeElement($purchase)) {
+            // set the owning side to null (unless already changed)
+            if ($purchase->getUser() === $this) {
+                $purchase->setUser(null);
+            }
+        }
 
         return $this;
     }
