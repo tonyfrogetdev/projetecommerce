@@ -32,25 +32,25 @@ class CartService {
     public function add(int $id){
    
         
-        // 1. Retrouver le panier dans la session(sous forme de tableau)
-        // 2. Si il existe pas encore, alors prendre un tableau vide
+        //  Je retrouve le panier dans la session en tableau 
+        //  Si il existe pas , je renvois un tableau vide
 
         $cart = $this->getCart();
 
-        // 3. Voir si le produit ($id) existe déjà dans le tableau
-        // 4. Si c'est le cas, simplement augmenter la quantité 
-        // 5. Sinon, ajouter le produit avec la quantité 1
+        //  Voir si le produit ($id) existe déjà dans le tableau
+        //  si oui, j'augmente la quantité avec [$id]++
+        //  sinon ajouter le produit avec la quantité 1
 
         if (!array_key_exists($id, $cart)) {
             $cart[$id] = 0;
         } 
 
         $cart[$id]++;
-        // 6. Enregistrer le tableau mis à jour dans la session
+        //  je save le tableau mis à jour 
 
         $this->saveCart($cart);
 
-        // permet de supprimer le panier
+        // si jamais je veux supprimer le panier je peux utiliser ça
         // $session->remove('cart');
 
     }

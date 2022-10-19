@@ -6,7 +6,9 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,14 +20,29 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo')
-            ->add('fullName')
-            ->add('email')
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo',
+                'attr' => ['class'=> 'form-control', 'placeholder' => 'Indiquez le pseudo'],
+                'required'=>false, 
+                ])
+
+            ->add('fullName', TextType::class, [
+                'label' => 'Nom complet',
+                'attr' => ['class'=> 'form-control', 'placeholder' => 'Indiquez le nom complet'],
+                'required'=>false, 
+                ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+                'attr' => ['class'=> 'form-control', 'placeholder' => 'Indiquez l\'email'],
+                'required'=>false, 
+                ])
             ->add('civilite', ChoiceType::class,[
                 "choices" => [
                     "Madame" => "f",
                     "Monsieur" => "m"
-                ]
+                ],
+            
+                
             
             ])
             
@@ -36,25 +53,26 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter nos termes.',
                     ]),
                 ],
+                'required'=>false,
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['class'=> 'form-control', 'placeholder' => 'Indiquez le mot de passe'],
+                'required'=>false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Indiquez un mot de pase s\'il vous plaît',
+                        'message' => 'Le mot de passe est obligatoire',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères',
+                        'minMessage' => 'Le mot de passe doit au moins contenir {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
-                        'max' => 120,
-                    ]),
-                ],
-            ])
-        ;
+                        'max' => 4096,
+                    ])
+                    ]
+                ]);      
     }
 
     public function configureOptions(OptionsResolver $resolver): void

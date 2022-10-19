@@ -31,7 +31,7 @@ Mes commandes
         <td> {{ p.purchaseAt | date('d/m/Y H:i') }}</td>
         <td> <ul>
         {% for item in p.purchaseItems %}
-        <li>{{item.productName}} ({{item.total /100 }} €)</li>           
+        <li>{{item.product.name}} ({{item.total /100 }} €)</li>           
         {% endfor %}
         
         </ul></td>

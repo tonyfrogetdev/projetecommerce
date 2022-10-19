@@ -25,6 +25,11 @@ services:
 
     Cocur\Slugify\Slugify: ~
 
+    App\Stripe\StripeService:
+        arguments:
+            $secretKey: sk_test_51LuG0HAeLjIUesA8vc0dkjW25ITE1mknVOkbLYwppWPmtR7gOqBi8yp736VtzFtGexVbQgg3Jq0KbDgmdRjuzjFR00t0IbcHCB
+            $publicKey: pk_test_51LuG0HAeLjIUesA8K30PSdXGqiNSTB0GhzjwtEqpC5rVoCrzb2zcaV7TQ6M7nGAnK0umVkMy7lQXxLkmtGsHXLyu00RrCTVKqK
+
     App\Taxes\Calculator:
         arguments:
              $tva : 20
