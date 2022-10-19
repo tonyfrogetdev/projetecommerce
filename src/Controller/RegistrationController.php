@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,20 @@ class RegistrationController extends AbstractController
         $membres = $this->em->getRepository(User::class)->findAll();
         return $this->render('registration/index.html.twig', [
             'membres' => $membres
+        ]);
+    }
+
+     /**
+     * @Route("/mesinformations/{id}", name="voir_infos")
+     */
+    public function voirinformation($id): Response
+    {   
+        $user = $this->getUser($id);
+
+        $user = $this->em->getRepository(User::class)->find($id);
+        
+        return $this->render('registration/voir.html.twig', [
+            'users' => $user
         ]);
     }
 
@@ -60,4 +75,32 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/information/{id}/edit", name="modifier_membre")
+     */
+    public function editregister($id, Request $request, UserRepository $userRepository, EntityManagerInterface $em)
+    {
+
+        $user = $this->getUser($id);
+        $user = $this->em->getRepository(User::class)->find($id);
+        $form = $this->createForm(RegistrationFormType::class, $user);
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form-> isValid()) {
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('modifier_membre');
+
+            
+        }
+
+        return $this->render('registration/edit.html.twig', [
+            'registrationForm' => $form->createView(),
+            'useredit' => $user,
+        ]);
+    }
+    
 }

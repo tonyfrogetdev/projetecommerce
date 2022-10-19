@@ -30,7 +30,7 @@
 
 						<a class="dropdown-item" href="{{ path('product_category',{'slug': 'figurines' }) }}">Figurines</a>
 
-<div class="dropdown-divider"></div>
+						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item" href="{{ path('product_category',{'slug': 'goodies' }) }}">Goodies</a>
 					</div>
@@ -45,11 +45,30 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu Admin</a>
 					<div class="dropdown-menu">
-						<a href="{{ path('product_create')}}" class="dropdown-item">Créer une nouvelle catégorie</a>
+						<a href="{{ path('product_create')}}" class="dropdown-item">Créer un nouveau produit</a>
 						<div class="dropdown-divider"></div>
-						<a href="{{ path('category_create')}}" class="dropdown-item">Créer un nouveau produit</a>
+						<a href="{{ path('category_create')}}" class="dropdown-item">Créer une nouvelle catégorie</a>
 						<div class="dropdown-divider"></div>
 						<a href="{{ path('inscription_liste') }}" class="dropdown-item">Liste des membres</a>
+
+
+					</div>
+
+				</li>
+
+
+			{% endif %}
+
+			{% if is_granted('ROLE_USER') %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+
+					<div class="dropdown-menu">
+						<a href="{{ path('purchase_index') }}" class="dropdown-item">Mes commandes</a>
+						<div class="dropdown-divider"></div>
+						<a href="{{ path('voir_infos',{'id': 'mesinfos' }) }}" class="dropdown-item">Voir mes informations</a>
+						<div class="dropdown-divider"></div>
+						<a href="{{ path('modifier_membre',{'id': 'useredit' }) }}" class="dropdown-item">Modifier ses informations</a>
 
 
 					</div>
@@ -65,11 +84,6 @@
 			</li>
 
 			{% if app.user %}
-
-				<li class="nav-item">
-					<a href="{{ path('purchase_index') }}" class="nav-link">Mes commandes</a>
-				</li>
-
 				<li class="nav-item">
 					<a href="{{ path('security_logout') }}" class="btn btn-danger">Déconnexion</a>
 				</li>

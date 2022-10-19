@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations {% endblock %}
+
+{% block body %}
+   <h1>Mon profil de {{ app.user.fullName }}</h1>
+    <table class="table table-striped">
+        <thead>
+    
+            <tr>
+                
+                <th style="width:25%">Mon pseudo</th>
+                <th style="width:25%">Ma civilité</th>
+                <th style="width:25%">Mon nom et prénom</th>
+                <th style="width:25%">Mon e-mail</th>
+            
+            </tr>
+            
+        </thead>
+          <tbody>
+            
+                <tr>
+                
+                    <td class="align-middle">{{ app.user.pseudo }}</td>
+                     <td class="align-middle">{{ app.user.civilite }}</td> 
+                    <td class="align-middle">{{ app.user.fullName }}</td>
+                    <td class="align-middle">{{ app.user.email }}</td>
+                    
+                </tr>
+            
+        </tbody>
+    </table>
+{% endblock %}
