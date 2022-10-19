@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class CartConfirmationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -17,37 +18,34 @@ class CartConfirmationType extends AbstractType
             ->add('fullName', TextType::class, [
                 'label' => 'Nom complet',
                 'attr' => [
-                    'placeholder' => "Nom complet pour la livraison",
-                    
-                ],
-                'required'=>false,
+                'placeholder' => "Nom complet pour la livraison" ],
+                
             ])
             ->add('adress', TextareaType::class, [
-                'label'=> 'Adresse complète',
+                'label' => 'Adresse complète',
                 'attr' => [
-                    'placeholder'=> 'Adresse complète pour la livraison',
-                    
+                    'placeholder' => 'Adresse complète pour la livraison'
+
                 ],
-                'required'=>false,
+                
             ])
-            ->add('postalCode', TextType::class,[
+            ->add('postalCode', TextType::class, [
                 'label' => 'Code Postal',
                 'attr' => [
-                    'placeholder' => 'Code postal pour la livraison',
-                    
+                    'placeholder' => 'Code postal pour la livraison'
+
                 ],
-                'required'=>false,
+                
             ])
 
-            ->add('city', TextType::class,[
+            ->add('city', TextType::class, [
                 'label' => 'Ville',
                 'attr' => [
-                    'placeholder' => 'Ville pour la livraison',
-                   
+                    'placeholder' => 'Ville pour la livraison'
+
                 ],
-                'required'=>false,
-            ])
-        ;
+                
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

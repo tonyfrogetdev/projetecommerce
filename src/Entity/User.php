@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
-     * @Assert\NotBlank(message="L'email est obligatoire'")
+     * @Assert\NotBlank(message="L'email est obligatoire")
      */
     private $email;
 
@@ -46,6 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le nom complet est obligatoire")
+     * @Assert\Length(min=4, minMessage="Le nom complet doit contenir au moins 3 caractères")
      */
     private $fullName;
 

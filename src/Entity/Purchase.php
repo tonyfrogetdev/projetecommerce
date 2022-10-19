@@ -24,29 +24,31 @@ class Purchase
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez indiquez votre nom")
-     * @Assert\Length(min=3, max=255,minMessage= "Le nom du produit doit avoir au moins 3 caractères")
+     * @Assert\NotBlank(message="Le nom complet est obligatoire")
+     * @Assert\Length(min=4, minMessage="Le nom complet doit contenir au moins 4 caractères")
+     
      */
     private $fullName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez indiquez une adresse")
-     * @Assert\Length(min=3, max=255,minMessage= "Le nom du produit doit avoir au moins 3 caractères")
+     * @Assert\NotBlank(message="L'adresse est obligatoire")
+     * @Assert\Length(min=4, minMessage="L'adresse doit contenir au moins 4 caractères")
+     * 
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez indiquez le code postal")
-     * @Assert\Length(min=3, max=255,minMessage= "Le nom du produit doit avoir au moins 3 caractères")
+     * @Assert\NotBlank(message="Le code postal est obligatoire")
+     * @Assert\Length(min=3, minMessage="Le code postal doit contenir au moins 3 caractères")
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez indiquez la ville")
-     * @Assert\Length(min=3, max=255,minMessage= "Le nom du produit doit avoir au moins 3 caractères")
+     * @Assert\NotBlank(message="La ville est obligatoire")
+     * @Assert\Length(min=2, minMessage="La ville doit contenir au moins 2 caractères")
      */
     private $city;
 

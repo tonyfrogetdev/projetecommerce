@@ -16,6 +16,7 @@ Mes commandes
 <thead>
     <tr>
         <th>Numéro</th>
+        <th>Nom complet</th>
         <th>Adresse</th>
         <th>Date de commande</th>
         <th>Produits</th>
@@ -27,6 +28,7 @@ Mes commandes
 {% for p in purchases %}
     <tr>
         <td>{{ p.id }}</td>
+        <td> {{ p.fullName }}</td>
         <td>{{ p.adress }} <br> {{ p.postalCode }}, {{ p.city }}</td>
         <td> {{ p.purchaseAt | date('d/m/Y H:i') }}</td>
         <td> <ul>
