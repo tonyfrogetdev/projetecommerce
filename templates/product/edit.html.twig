@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="editcontainer">
 	<h1>
 		Editer le produit
 		{{product.name}}</h1>
@@ -23,7 +24,7 @@
 
 		</div>
 		<div class="col">
-			{{ form_row(formView.mainPicture)}}
+			{{ form_row(formView.imageFile)}}
 			{{ form_row(formView.category) }}
 			{{ form_row(formView.shortDescription) }}
 
@@ -37,4 +38,5 @@
 		Modifier le produit
 	</button>
 	{{ form_end(formView) }}
+	</div>
 {% endblock %}

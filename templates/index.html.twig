@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+Royaume des duellistes
+
+
+{% endblock %}
+{% block body %}
+	<div class="homecontent">
+	<h1>Royaume des Duellistes</h1>
+<h2>Boutique spécialisée Yu-gi-Oh !</h1>
+
+<h3>Nous sommes experts sur Yu-Gi-Oh ! Nous fournissons les nouvelles cartes ou vintages en boosters et en display(boîtes de boosters)</h2>
+
+<div class="positionbouton">
+{% if app.user %}
+<button type="button" class="btn btn-warning" id="button"><a href="#" id="buttonlien">Nos tournois(bientôt)</a></button>
+{% else %}
+<button type="button" class="btn btn-warning" id="button"><a href="{{ path('app_register') }}" id="buttonlien">S'inscrire</a></button>
+{% endif %}
+</div>
+</div>
+
+	
+
+	
+{% endblock %}
+

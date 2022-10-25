@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 class ProductType extends AbstractType
 {
@@ -43,13 +44,17 @@ class ProductType extends AbstractType
 
             ])
 
+           
 
-            ->add('mainPicture', UrlType::class, [
+            ->add('imageFile', VichImageType::class, [
+                
                 'label' => 'Image du produit',
-                'attr' => ['placeholder' => 'tapez une url d\'image !'],
-                'required' => false,
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
 
+                ]
             ])
+
             ->add('category', EntityType::class, [
                 'label' => 'Catégorie',
                 'attr' => [

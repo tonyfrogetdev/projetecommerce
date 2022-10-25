@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -38,18 +41,35 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+    
+  
 
-    /**
+       /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="products", fileNameProperty="imageName")
+     *
+     * @var File
+     */
+    private $imageFile;
+ 
+
+      /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    public $imageName;
+
+
+
+      /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      */
+
     private $category;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url(message="La photo principale doit être une URL valide")
-     * @Assert\NotBlank(message="La photo principale est obligatoire")
-     */
-    private $mainPicture;
+  
 
     /**
      * @ORM\Column(type="text")
@@ -118,6 +138,36 @@ class Product
         $this->slug = $slug;
 
         return $this;
+    }
+
+      /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+    
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     public function getCategory(): ?Category

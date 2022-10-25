@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="container">
 	<h1>Votre panier</h1>
 	{% if items | length > 0 %}
 
@@ -62,6 +62,7 @@
 		<hr>
 
 		{% if app.user %}
+		
 		<h2>Confirmez votre commande en remplissant ce formulaire</h2>
 		{{ form_start(confirmationForm, {'action': path('purchase_confirm')}) }}
 
@@ -83,7 +84,7 @@
 		{% endif %}
 		
 	{% else %}
-		<h2>Votre panier est vide !</h2>
+		<h2> Votre panier est vide !</h2>
 	{% endif %}
-
+</div>
 {% endblock %}

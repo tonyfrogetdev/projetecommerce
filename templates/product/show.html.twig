@@ -2,7 +2,7 @@
 
 {% block title %}
 	Page de
-	{{ app.product.name }}
+	{{ product.name }}
 {% endblock %}
 
 
@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-4">
-			<img class="img-fluid" src="{{ product.mainPicture }}" alt="Image de {{ product.name }}">
+			<img class="img-fluid" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="Image de {{ product.name }}">
 		</div>
 		<div class="col">
 			<span class="badge bg-primary">
@@ -37,4 +37,16 @@
 		</div>
 
 	</div>
+	{# <h1 class="text-center">
+		Catégorie :
+		{{ category.name }}</h1>
+	<section class="containercategory">
+
+		{% for p in category.products %}
+			<div>
+
+				{% include "product/_product_card.html.twig" %}
+
+			</div>
+		{% endfor %}#}
 {% endblock %}

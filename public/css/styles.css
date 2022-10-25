@@ -1,6 +1,302 @@
-header{
-    background-color: #000002;
-    color: white ;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+
+}
+
+
+
+/* Tout par rapport au body */
+body{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner{
+    width:100%;
+    height: 100vh;
+    position: relative;
+    
+}
+
+
+
+
+
+.overlay{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(20, 20, 20, 0.7),rgba(20, 20, 20, 0.7));
+    position: absolute;
+    top: 0;
+}
+
+
+
+/*ROULEMENT D 'IMAGES*/
+
+.slider{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+}
+#slideImg{
+    width: 100%;
+    height: 100%;
+    animation-duration: 3s;
+    
+
+}
+/*ICI CEST LA NAV BAR*/
+
+/* HOME CONTENT */
+.homecontent{
+    width: 60%;
+    margin: 160px auto 0;
     text-align: center;
-    padding-bottom: 30px;
+    
+
+}
+
+.homecontent h1{
+    color: #fff;
+    font-size: 70px;
+}
+
+.homecontent h2{
+    color: #fff;
+    font-size: 50px;
+}
+
+.homecontent h3{
+    color: #fff;
+    width: 80%;
+    font-size: 20px;
+    margin: 20px auto 100px;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+#button{
+    
+    
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 35px;
+    font-weight: bold;
+    
+    
+}
+
+
+
+#button:hover{
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+#buttonlien{
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+
+/* CATEGORY PAGES*/
+#breadcrumbarre{
+    background-color: black;
+    justify-content: center;
+}
+.containercategory{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    width: 400px;
+    height:200px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.card-image{
+    
+    height: 300px;
+    margin-bottom: 25px;
+    background-size: cover;
+    
+
+
+}
+
+.card h2{
+    
+    font-size: 1.5em;
+    margin-top: 20px;
+  
+    
+}
+.card p {
+    padding: 5px;
+}
+
+.card:hover{
+    background-color: rgb(62, 62, 62);
+    color: white;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 1 ease;
+}
+
+.containershow{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* ICI CEST POUR LE FORM */
+
+.formcontainer, .formcontainer-lg, .formcontainer-md, .formcontainer-sm, .formcontainer-xl, .formcontainer-xxl {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+   
+    
+}
+/*IMAGE DES FORMS */
+
+
+.container h1{
+    text-align: center;
+    font-size: 2em;
+}
+
+.container h2{
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.editcontainer{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.editcontainer h1{
+    text-align: center;
+    font-size: 2em;
+    
+}
+
+li{
+    list-style-type: none;
+    display: inline;
+    margin: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   
+}
+
+li a{
+    text-decoration: none;
+    color: white;
+}
+
+li:hover{
+    font-weight: bold;
+    color: white;
+}
+
+footer .container{
+    text-align: center;
+}
+
+.separator {
+    width: 300px;
+    height: 1px;
+    margin: 15px auto;
+    display: block;
+    background-color: #999999;
+}
+
+/* les medias queries(c'est dure)*/
+
+@media only screen and (max-width:480px){
+   /* Tout par rapport au body */
+body{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.homecontent{
+    width: 100%;
+    margin: 10px auto 0;
+    text-align: center;
+    
+
+}
+
+.homecontent h1{
+    color: #fff;
+    font-size: 1.5em;
+}
+
+.homecontent h2{
+    color: #fff;
+    font-size: 1em;
+}
+
+.homecontent h3{
+    color: #fff;
+    width: 80%;
+    font-size: 1em;
+    margin: 20px auto 100px;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+/* BUTTON MEDIA QUERIES*/
+
+#button{
+    
+    
+    width: 100px;
+    text-align: center;
+    
+    border-radius: 35px;
+    font-weight: bold;
+    
+    
+}
+
+.positionbouton{
+    margin-top: 30px;
+}
+
+#button:hover{
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+#buttonlien{
+    text-decoration: none;
+    color: white;
+}
+
+footer{
+    margin-top: 20px;
+}
 }

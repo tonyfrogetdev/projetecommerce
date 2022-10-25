@@ -58,13 +58,16 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/{id}/edit"), name="product_edit")
+     * @Route("/admin/product/{id}/edit"), name="modifier_produit")
      * 
      */
-    public function edit($id, ProductRepository $productRepository, Request $request, EntityManagerInterface $em, ValidatorInterface $validator)
+    public function edit(ProductRepository $productRepository, Request $request, EntityManagerInterface $em, $categorySlug,$slug)
     {
     
-        $product = $productRepository->find($id);
+        $product = $productRepository->findOneBy([
+            'category_slug' =>$categorySlug,
+            'slug' =>$slug
+        ]);
 
         $form = $this->createForm(ProductType::class, $product);
 
@@ -74,7 +77,7 @@ class ProductController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute('product_show', [
+            return $this->redirectToRoute('product_edit', [
                 'category_slug' => $product->getCategory()->getSlug(),
                 'slug' => $product->getSlug()
             ]);
