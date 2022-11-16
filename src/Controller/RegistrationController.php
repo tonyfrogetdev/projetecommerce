@@ -25,10 +25,10 @@ class RegistrationController extends AbstractController
      */
     public function index(): Response
     {
-        $membres = $this->em->getRepository(User::class)->findAll();
-        return $this->render('registration/index.html.twig', [
-            'membres' => $membres
-        ]);
+            $membres = $this->em->getRepository(User::class)->findAll();
+            return $this->render('registration/index.html.twig', [
+                'membres' => $membres
+            ]);
     }
 
      /**

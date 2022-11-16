@@ -10,6 +10,16 @@
 	<p class="overflow-hidden  p-3">{{ p.shortDescription }}</p>
 	<a href="{{ path('product_show', {'category_slug': p.category.slug, 'slug':p.slug}) }}" class="btn btn-warning btn-sm">Détails du produit</a>
 		<a href="{{ path('cart_add', {'id': p.id}) }}" class="btn btn-success btn-sm">Ajouter au panier</a>
+
+		{% if is_granted('ROLE_ADMIN') %}	
+
+		<a href="{{ path('modifier_produit') }}">Modifier le produit</a>
+		<a href="#"></a>
+
+
+
+
+		{% endif %}
 </div>
 
 

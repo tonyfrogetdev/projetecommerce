@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des produits {% endblock %}
+
+{% block body %}
+<div class="container">
+   <h1>Liste des produits disponibles</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width:25%">Id du produit</th>
+                <th style="width:25%">Nom du produit</th>
+                <th style="width:25%">Prix du produit</th>
+                <th style="width:25%">Catégorie du produit</th>
+             
+            
+            </tr>
+            
+        </thead>
+          <tbody>
+            {%  for produit in produits %}
+                <tr>
+                    <td class="align-middle">{{ produit.id }}</td>
+                    <td class="align-middle">{{ produit.name}}</td>
+                     <td class="align-middle">{{ produit.price}}</td> 
+                    <td class="align-middle">{{ produit.category}}</td>
+                    
+                    
+                </tr>
+            {% else %}
+                <tr>
+                    <td colSpan="7">Aucun produits enregistrés pour le moment</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

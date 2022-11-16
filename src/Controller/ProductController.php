@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductController extends AbstractController
 {
+    private $em;
+    
+    public function __construct(EntityManagerInterface $entityManager){
+        $this->em = $entityManager ;
+    
+    }
+
+
     /**
      * @Route("/{slug}", name="product_category", priority = -1)
      */
@@ -77,7 +86,7 @@ class ProductController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute('product_edit', [
+            return $this->redirectToRoute('modifier_produit', [
                 'category_slug' => $product->getCategory()->getSlug(),
                 'slug' => $product->getSlug()
             ]);
